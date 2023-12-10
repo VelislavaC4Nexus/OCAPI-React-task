@@ -1,13 +1,14 @@
+import { Route, Routes } from "react-router-dom";
+import { CartProvider } from './contexts/CartContext';
+import useAuth from './hooks/useAuth';
+import Home from './home/Home';
 import Header from './header/Header';
 import Footer from './footer/Footer';
-import { Route, Routes } from "react-router-dom";
-import Home from './home/Home';
 import ProductDetails from './products/productDetails';
 import RouteError from './components/RouteError';
-import { CartProvider } from './contexts/CartContext';
 import Cart from './cart/Cart';
 import Checkout from './checkout/Checkout';
-import useAuth from './hooks/useAuth';
+import Order from './order/Order';
 
 function App() {
   const authurl =
@@ -24,6 +25,7 @@ function App() {
             <Route path='/:id' element={<ProductDetails />}></Route>
             <Route path='/cart' element={<Cart />}></Route>
             <Route path='/checkout' element={<Checkout />}></Route>
+            <Route path='/order' element={<Order />}></Route>
             <Route path="*" element={<RouteError />}></Route>
           </Routes>
         </main>

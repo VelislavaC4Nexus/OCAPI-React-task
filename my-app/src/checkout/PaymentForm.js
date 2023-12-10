@@ -1,14 +1,16 @@
-import {useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useCartContext } from "../contexts/CartContext";
 import useFetch from "../hooks/useFetch";
 import Loading from '../components/Loading';
 import paymentFormValidationSchema from '../validations/paymentFormValidation';
-import { putBillingAddress } from '../services/checkoutService';
+import { postPaymentInstrument, putBillingAddress } from '../services/checkoutService';
+import { useNavigate } from 'react-router-dom';
 
 
 const PaymentForm = () => {
     const { cart } = useCartContext();
+    const navigate = useNavigate();
     const basketId = cart?.basket_id;
 
     const options = {
@@ -21,14 +23,16 @@ const PaymentForm = () => {
 
     const urlPaymentMetods = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/baskets/${basketId}/payment_methods`;
     const { data, isLoading } = useFetch(urlPaymentMetods, options);
-    
+
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(paymentFormValidationSchema)
     });
 
     const submitForm = async (data) => {
         console.log(data);
-        await putBillingAddress(basketId,data)
+        await putBillingAddress(basketId, data);
+        await postPaymentInstrument(basketId, data);
+        navigate('/order')
         // await putShippingMethod(basketId, shipmentId, data.shipmentMethod);
         // setIsShipping(false);
     };
@@ -142,7 +146,7 @@ const PaymentForm = () => {
                                     please select method
                                 </option>
                                 {data.applicable_payment_methods?.map((method) => (
-                                    <option value={method?.name} key={method?.name}>
+                                    <option value={method?.id} key={method?.name}>
                                         {method.name}
                                     </option>
                                 ))}
@@ -150,7 +154,7 @@ const PaymentForm = () => {
                         </label>}
                     {errors.paymentMethod && <p className="login__errors">{errors.paymentMethod.message}</p>}
 
-                    {data && data.applicable_payment_methods ? 
+                    {data && data.applicable_payment_methods ?
                         <label>
                             Select Card Type
                             <select {...register('cardType')}>
@@ -163,7 +167,7 @@ const PaymentForm = () => {
                                     </option>
                                 ))}
                             </select>
-                        </label>: <Loading></Loading>}
+                        </label> : <Loading></Loading>}
                     {errors.cardType && <p className="login__errors">{errors.cardType.message}</p>}
 
                     <label className="create__label" htmlFor="cardNumber">Card Number:</label>
@@ -197,7 +201,7 @@ const PaymentForm = () => {
                     </span>
                     {errors.expirationMonth && <p className="login__errors">{errors.expirationMonth.message}</p>}
 
-                    
+
                     <label className="create__label" htmlFor="expirationYear">Expiration Year</label>
                     <span className="input">
                         <input
@@ -207,7 +211,7 @@ const PaymentForm = () => {
                         />
                     </span>
                     {errors.expirationYear && <p className="login__errors">{errors.expirationYear.message}</p>}
-                    
+
                     <div className="">
                         <input
                             className="button submit"

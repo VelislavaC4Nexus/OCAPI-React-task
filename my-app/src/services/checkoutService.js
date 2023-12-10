@@ -46,7 +46,7 @@ export const putShippingMethod = async (basketId, shipmentId, shippingMethodId) 
                 "Content-Type": "application/json",
                 "Authorization": localStorage.getItem('token'),
             },
-            body:JSON.stringify({ "id": shippingMethodId.toString() })
+            body: JSON.stringify({ "id": shippingMethodId.toString() })
         });
 
         if (!response.ok) {
@@ -97,6 +97,43 @@ export const putBillingAddress = async (basketId, formData) => {
     }
 
     return responseBillingAddress;
+};
+export const postPaymentInstrument = async (basketId, formData) => {
+    const body = {
+        "payment_card": {
+            "card_type": formData.cardType,
+            "number": formData.cardNumber,
+            "security_code": formData.securityCode,
+            "expiration_month": formData.expirationMonth,
+            "expiration_year": formData.expirationYear,
+        },
+        "payment_method_id": formData.paymentMethod
+    };
+
+    const urlPostPaymentInstrument = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/baskets/${basketId}/payment_instruments`;
+    let responsePaymentInstrument;
+
+    try {
+        const response = await fetch(urlPostPaymentInstrument, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem('token'),
+            },
+            body: JSON.stringify(body)
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        responsePaymentInstrument = { ...data };
+    } catch (error) {
+        throw new Error(error);
+    }
+
+    return responsePaymentInstrument;
 };
 
 
