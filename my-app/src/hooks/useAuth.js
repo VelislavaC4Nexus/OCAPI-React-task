@@ -6,14 +6,14 @@ const optionsAuth = {
     'Content-Type': 'application/json',
     'x-dw-client-id': `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`,
   },
-  body :JSON.stringify({ type: 'guest' })
+  body : JSON.stringify({ type: 'guest' })
 };
 
 const useAuth = (url) => {
   const [token, setToken] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
+console.log("auth");
   // const existingToken = localStorage.getItem('token');
   // console.log(existingToken, 'existingToken');
   // let type;

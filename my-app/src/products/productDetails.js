@@ -4,14 +4,9 @@ import Loading from '../components/Loading';
 import LoadingError from '../components/LoadingError';
 import RouteError from '../components/RouteError';
 import Product from './Product';
-import useAuth from '../hooks/useAuth';
 
 const ProductDetails = () => {
   const { id } = useParams();
-
-  console.log("LOALSTORAGE",localStorage.getItem('token'));
-  const authurl =
-    'https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/customers/auth';
 
   const url = `https://zydc-004.dx.commercecloud.salesforce.com/s/Sites-RefArch-Site/dw/shop/v23_2/products/${id}?client_id=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&expand=images,prices,variations,availability`;
   // const optionsAuth = {
@@ -22,8 +17,6 @@ const ProductDetails = () => {
   //   },
   //   body: JSON.stringify({ type: 'guest' }),
   // }
-  const { token } = useAuth(authurl);
-  console.log(token, 'token');
 
   const { data, error, isLoading } = useFetch(url);
   console.log(data);

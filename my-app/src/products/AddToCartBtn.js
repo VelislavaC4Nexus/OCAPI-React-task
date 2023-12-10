@@ -1,19 +1,22 @@
 import useFetch from "../hooks/useFetch";
 import { useEffect, useState } from "react";
 import { useCartContext } from "../contexts/CartContext";
+
+const basketExists = () => localStorage.getItem('basket') !== null;
+
 const AddToCartBtn = ({ selectedProduct, quantity, isOrderable }) => {
     const { cart, setCart, setNumberOfCartItems } = useCartContext();
-    const existingBasket =  localStorage.getItem('basket');
-    useEffect(()=>{
-        if(existingBasket){
-            setCart((JSON.parse(localStorage.getItem('basket'))))
+
+    useEffect(() => {
+        if (basketExists()) {
+            setCart((JSON.parse(localStorage.getItem('basket'))));
         }
 
-    },[]
+    }, []
 
-    )
+    );
     console.log(cart, "cart");
-    console.log(cart, 'cart')
+    console.log(cart, 'cart');
     console.log(Array.isArray(cart), 'cart');
 
     const addToCartHandler = async () => {
@@ -24,18 +27,18 @@ const AddToCartBtn = ({ selectedProduct, quantity, isOrderable }) => {
         // if(existingBasket){
         //     setCart((JSON.parse(localStorage.getItem('basket'))))
         // }
-       
+
         // console.log(existingBasket,'existingBasket');
-        if (!existingBasket) {
-           const newBasket = await createBasket();
-            localStorage.setItem('basket',JSON.stringify(newBasket));
-            console.log(newBasket,'newBasket');
-            console.log(JSON.parse(localStorage.getItem('basket')),'SSSS');
-           
+        if (!basketExists()) {
+            const newBasket = await createBasket();
+            localStorage.setItem('basket', JSON.stringify(newBasket));
+            console.log(newBasket, 'newBasket');
+            console.log(JSON.parse(localStorage.getItem('basket')), 'SSSS');
+
         }
         //const basketId = cart.length > 0 ? cart.basket_id : checkCart.basket_id;
         // setBasketId(basketId);
-     
+
         const productData = [
             {
                 product_id: selectedProduct,
@@ -43,17 +46,15 @@ const AddToCartBtn = ({ selectedProduct, quantity, isOrderable }) => {
             }
         ];
         const newItemToBasket = await addProductToBasket(JSON.parse(localStorage.getItem('basket')).basket_id, productData);
-        localStorage.setItem('basket',JSON.stringify(newItemToBasket))
-        console.log(JSON.parse(localStorage.getItem('basket')),'ITEMINBASKET');
+        localStorage.setItem('basket', JSON.stringify(newItemToBasket));
+        console.log(JSON.parse(localStorage.getItem('basket')), 'ITEMINBASKET');
         console.log('newItemToBasket', newItemToBasket);
         setCart(newItemToBasket);
-        setNumberOfCartItems((previous)=>previous+=Number(quantity));
-
     };
 
     const addProductToBasket = async (basketId, productData) => {
-        console.log(basketId,'addProductToBasket');
-        console.log("productData",productData);
+        console.log(basketId, 'addProductToBasket');
+        console.log("productData", productData);
         const urlAddItemToBasket = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/baskets/${basketId}/items`;
 
         const token = localStorage.getItem('token');

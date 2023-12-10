@@ -14,8 +14,6 @@ const useFetch = (url, options) => {
 
       fetch(url, options)
         .then((response) => {
-          console.log('response', response);
-
           if (!response.ok) {
             console.log(error, 'hook');
             if (response.status === 404) {
@@ -29,9 +27,6 @@ const useFetch = (url, options) => {
         })
         .then((responseData) => {
           setData(responseData);
-          // if (options.onSuccess !== undefined) {
-          //   options.onSuccess(responseData)
-          // }
         })
         .catch((err) => {
           setError(err.message || 'An error occurred.');
