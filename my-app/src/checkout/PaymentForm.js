@@ -4,11 +4,11 @@ import { useCartContext } from "../contexts/CartContext";
 import useFetch from "../hooks/useFetch";
 import Loading from '../components/Loading';
 import paymentFormValidationSchema from '../validations/paymentFormValidation';
+import { putBillingAddress } from '../services/checkoutService';
 
 
 const PaymentForm = () => {
     const { cart } = useCartContext();
-    const shipmentId = cart?.shipments[0].shipment_id;
     const basketId = cart?.basket_id;
 
     const options = {
@@ -19,22 +19,16 @@ const PaymentForm = () => {
         },
     };
 
-    //get payment methods
     const urlPaymentMetods = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/baskets/${basketId}/payment_methods`;
     const { data, isLoading } = useFetch(urlPaymentMetods, options);
-
-    if(data){
-if(data.applicable_payment_methods){
-        console.log(data?.applicable_payment_methods[0]?.cards.map(card=>card))};
-    }
-    // return <div>billimg</div>
+    
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(paymentFormValidationSchema)
     });
 
     const submitForm = async (data) => {
         console.log(data);
-        // await addShippingAddress(basketId, shipmentId, data);
+        await putBillingAddress(basketId,data)
         // await putShippingMethod(basketId, shipmentId, data.shipmentMethod);
         // setIsShipping(false);
     };
@@ -126,22 +120,6 @@ if(data.applicable_payment_methods){
                         />
                     </span>
                     {errors.phoneNumber && <p className="login__errors">{errors.phoneNumber.message}</p>}
-                    {/* 
-                {isLoading ? <Loading /> :
-                    <label>
-                        Select Shipment Method
-                        <select {...register('shipmentMethod')}>
-                            <option value=''>
-                                please select method
-                            </option>
-                            {data.applicable_shipping_methods?.map((method) => (
-                                <option value={method?.id} key={method?.name}>
-                                    {method.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label>}
-                {errors.shipmentMethod && <p className="login__errors">{errors.shipmentMethod.message}</p>} */}
 
                     <label className="create__label" htmlFor="stateCode">State Code:</label>
                     <span className="input">
