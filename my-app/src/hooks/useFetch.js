@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 const useFetch = (url, options) => {
-  console.log("options",options);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,7 +14,6 @@ const useFetch = (url, options) => {
       fetch(url, options)
         .then((response) => {
           if (!response.ok) {
-            console.log(error, 'hook');
             if (response.status === 404) {
               throw new Error(response.status);
             } else {
