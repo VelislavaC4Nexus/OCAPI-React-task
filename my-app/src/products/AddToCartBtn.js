@@ -5,7 +5,7 @@ import { useCartContext } from "../contexts/CartContext";
 const basketExists = () => localStorage.getItem('basket') !== null;
 
 const AddToCartBtn = ({ selectedProduct, quantity, isOrderable }) => {
-    const { cart, setCart, setNumberOfCartItems } = useCartContext();
+    const { cart, setCart} = useCartContext();
 
     useEffect(() => {
         if (basketExists()) {

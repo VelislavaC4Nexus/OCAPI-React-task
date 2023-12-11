@@ -6,27 +6,32 @@ export const useCartContext = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('basket')));
-    const [numberOfCartItems, setNumberOfCartItems] = useState(0);
+    //const [numberOfCartItems, setNumberOfCartItems] = useState(0);
     const [order, setOrder] = useState(null);
-    console.log(numberOfCartItems);
+    let totalQuantity;
+    if (cart && cart.product_items?.length) {
+        totalQuantity = cart.product_items.reduce((acc, item) => acc + item.quantity, 0);
+    } else {
+        totalQuantity = 0;
+    }
 
-    useEffect(() => {
-        if (cart && cart.product_items?.length) {
-            // cart.product_items.map(item=>item.quntity)
-            const totalQuantity = cart.product_items.reduce((acc, item) => acc + item.quantity, 0);
-            setNumberOfCartItems(totalQuantity);
-        }
-
-    }, [cart]);
-    console.log(cart);
+    // useEffect(() => {
+    //     if (cart && cart.product_items?.length) {
+    //         // cart.product_items.map(item=>item.quntity)
+    //         const totalQuantity = cart.product_items.reduce((acc, item) => acc + item.quantity, 0);
+    //         setNumberOfCartItems(totalQuantity);
+    //     }
+    // }, [cart]);
+    // console.log(cart);
 
     return (
         <CartContext.Provider
             value={{
                 cart,
                 setCart,
-                numberOfCartItems,
-                setNumberOfCartItems,
+                totalQuantity,
+                // numberOfCartItems,
+                // setNumberOfCartItems,
                 order,
                 setOrder
             }}

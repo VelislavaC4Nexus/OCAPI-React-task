@@ -10,7 +10,7 @@ const Cart = () => {
 navigate('/checkout')
     }
     // console.log(Array.isArray(cart.product_items), 'cart');
-    if (cart?.product_items.length) {
+    if (cart && cart.product_items) {
         return <>
             <div>Cart</div>
             <div>{cart.product_items.map(item => <ProductTile item={item} key={item.item_id} />)}</div>

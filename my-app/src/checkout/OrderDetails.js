@@ -2,10 +2,11 @@ import { useCartContext } from "../contexts/CartContext";
 import ProductTile from "../cart/ProductTile";
 import { postOrder } from "../services/checkoutService";
 import { useNavigate } from "react-router-dom";
+import ProductTileCheckout from "./ProductTileCheckout";
 
 const OrderDetails = () => {
     const navigate = useNavigate();
-    const { cart, setCart, setNumberOfCartItems, setOrder } = useCartContext();
+    const { cart, setCart, setOrder } = useCartContext();
     const basketId = cart?.basket_id;
     console.log(cart);
 
@@ -13,7 +14,7 @@ const OrderDetails = () => {
         const responsePostOrder = await postOrder(basketId);
         localStorage.removeItem('basket');
         setCart('');
-        setNumberOfCartItems(0);
+        // setNumberOfCartItems(0);
         setOrder(responsePostOrder);
         navigate('/order');
     };
@@ -21,7 +22,7 @@ const OrderDetails = () => {
     if (cart?.product_items.length) {
         return <>
             <h2>Cart: </h2>
-            <div>{cart.product_items.map(item => <ProductTile item={item} key={item.item_id} />)}</div>
+            <div>{cart.product_items.map(item => <ProductTileCheckout item={item} key={item.item_id} />)}</div>
             <div>Shipping method:{cart.shipments[0].shipping_method.description}</div>
             <div>Shipping method price:{cart.shipments[0].shipping_method.price}</div>
             <h2>Sipping Address: </h2>

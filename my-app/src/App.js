@@ -21,7 +21,7 @@ function App() {
         <Header />
         <main>
           <Routes>
-            <Route path='/' element={<Navigate to="/42416786M" />}></Route>
+            <Route path='/'element={<RouteError />}></Route>
             <Route path='/:id' element={<ProductDetails />}></Route>
             <Route path='/cart' element={<Cart />}></Route>
             <Route path='/checkout' element={<Checkout />}></Route>

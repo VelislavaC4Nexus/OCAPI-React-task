@@ -3,9 +3,9 @@ import { useCartContext } from "../contexts/CartContext";
 import useFetch from "../hooks/useFetch";
 
 const Order =()=>{
-    const {cart,order} =useCartContext();
+    const {order} =useCartContext();
     const contentAssetId ='v_CA_FEtask_order_message_success'
-    const urlGetContentAsset = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/content/${contentAssetId}`;
+    const urlGetContentAsset = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/content/${contentAssetId}?client_id=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`;
     const options = {
         method: "GET",
         headers: {
