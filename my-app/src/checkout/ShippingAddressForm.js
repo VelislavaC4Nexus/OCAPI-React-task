@@ -2,12 +2,12 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import shippingFormValidationSchema from '../validations/shippingFormValidationSchema';
 import Loading from '../components/Loading';
-import { putShippingMethod,addShippingAddress } from '../services/checkoutService';
+import { putShippingMethod, addShippingAddress } from '../services/checkoutService';
 import { useCartContext } from '../contexts/CartContext';
 import useFetch from '../hooks/useFetch';
 
-const ShippingAddressForm = ({setIsShipping,isShipping}) => {
-    const { cart } = useCartContext();
+const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
+    const { cart, setCart } = useCartContext();
     const shipmentId = cart?.shipments[0].shipment_id;
     const basketId = cart?.basket_id;
 
@@ -27,12 +27,12 @@ const ShippingAddressForm = ({setIsShipping,isShipping}) => {
     });
 
     const submitForm = async (data) => {
-        console.log('SUBMIT');
+        console.log('SUBMIT shipping');
         setIsShipping(false);
-        console.log(isShipping);
-       const sth = await addShippingAddress(basketId, shipmentId, data);
-       const asd= await putShippingMethod(basketId, shipmentId, data.shipmentMethod);
-        console.log(isShipping,'isShipping');
+        const responseAddShippingAddress = await addShippingAddress(basketId, shipmentId, data);
+        const responseAddPutShippingMethod = await putShippingMethod(basketId, shipmentId, data.shipmentMethod);
+        setCart(responseAddPutShippingMethod);
+        localStorage.setItem('basket', JSON.stringify(responseAddPutShippingMethod));
 
     };
     return (<>

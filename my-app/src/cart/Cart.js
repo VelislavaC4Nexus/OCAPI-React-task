@@ -4,6 +4,7 @@ import ProductTile from "./ProductTile";
 
 const Cart = () => {
     const { cart } = useCartContext();
+    console.log(cart);
     const navigate = useNavigate()
     const goToCheckoutHandler=()=>{
 navigate('/checkout')
@@ -13,13 +14,7 @@ navigate('/checkout')
         return <>
             <div>Cart</div>
             <div>{cart.product_items.map(item => <ProductTile item={item} key={item.item_id} />)}</div>
-            {/* <div>{cart.product_items?.map(<ProductTile></ProductTile>)}</div>
-    {cart.product_items.map(item=>{
-        <ProductTile 
-        key={item.item_id} 
-       item={item} */}
-            {/* /> */}
-            {/* })} */}
+       
             <button onClick={goToCheckoutHandler}>Go to Checkout</button>
         </>;
 

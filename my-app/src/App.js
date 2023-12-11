@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { CartProvider } from './contexts/CartContext';
 import useAuth from './hooks/useAuth';
-import Home from './home/Home';
 import Header from './header/Header';
 import Footer from './footer/Footer';
 import ProductDetails from './products/productDetails';
@@ -21,7 +21,7 @@ function App() {
         <Header />
         <main>
           <Routes>
-            <Route path='/' element={<Home />}></Route>
+            <Route path='/' element={<Navigate to="/42416786M" />}></Route>
             <Route path='/:id' element={<ProductDetails />}></Route>
             <Route path='/cart' element={<Cart />}></Route>
             <Route path='/checkout' element={<Checkout />}></Route>

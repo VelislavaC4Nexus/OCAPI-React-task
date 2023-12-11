@@ -8,9 +8,8 @@ import { postPaymentInstrument, putBillingAddress } from '../services/checkoutSe
 import { useNavigate } from 'react-router-dom';
 
 
-const PaymentForm = () => {
-    const { cart } = useCartContext();
-    const navigate = useNavigate();
+const PaymentForm = ({ setIsReadyToOrder }) => {
+    const { cart, setCart } = useCartContext();
     const basketId = cart?.basket_id;
 
     const options = {
@@ -29,12 +28,13 @@ const PaymentForm = () => {
     });
 
     const submitForm = async (data) => {
+        console.log('SUBMIT payment');
         console.log(data);
-        await putBillingAddress(basketId, data);
-        await postPaymentInstrument(basketId, data);
-        navigate('/order')
-        // await putShippingMethod(basketId, shipmentId, data.shipmentMethod);
-        // setIsShipping(false);
+        const responsePutBillingAddress = await putBillingAddress(basketId, data);
+        const responsePostPaymentInstrument = await postPaymentInstrument(basketId, data);
+        setCart(responsePostPaymentInstrument);
+        localStorage.setItem('basket', JSON.stringify(responsePostPaymentInstrument));
+        setIsReadyToOrder(true);
     };
 
     return (
@@ -216,7 +216,7 @@ const PaymentForm = () => {
                         <input
                             className="button submit"
                             type="submit"
-                            defaultValue="Add Billing Address"
+                            value="Add Payment"
                         />
                     </div>
                 </form >

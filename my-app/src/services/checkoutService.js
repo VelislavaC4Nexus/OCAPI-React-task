@@ -135,5 +135,41 @@ export const postPaymentInstrument = async (basketId, formData) => {
 
     return responsePaymentInstrument;
 };
+export const postOrder = async (basketId, ) => {
+    // const body = {
+    //     "payment_card": {
+    //         "card_type": formData.cardType,
+    //         "number": formData.cardNumber,
+    //         "security_code": formData.securityCode,
+    //         "expiration_month": formData.expirationMonth,
+    //         "expiration_year": formData.expirationYear,
+    //     },
+    //     "payment_method_id": formData.paymentMethod
+    // };
 
+    const urlPostPaymentInstrument = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/orders`;
+    let responsePostOrder;
+
+    try {
+        const response = await fetch(urlPostPaymentInstrument, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem('token'),
+            },
+            body: JSON.stringify({"basket_id": basketId})
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        responsePostOrder = { ...data };
+    } catch (error) {
+        throw new Error(error);
+    }
+
+    return responsePostOrder;
+};
 
