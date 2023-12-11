@@ -4,11 +4,12 @@ import Loading from '../components/Loading';
 import LoadingError from '../components/LoadingError';
 import RouteError from '../components/RouteError';
 import Product from './Product';
+import ProductBundle from './ProductBundle';
 
 const ProductDetails = () => {
   const { id } = useParams();
 
-  const url = `https://zydc-004.dx.commercecloud.salesforce.com/s/Sites-RefArch-Site/dw/shop/v23_2/products/${id}?client_id=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&expand=images,prices,variations,availability`;
+  const url = `https://zydc-004.dx.commercecloud.salesforce.com/s/Sites-RefArch-Site/dw/shop/v23_2/products/${id}?client_id=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&expand=images,prices,variations,availability,bundled_products`;
   // const optionsAuth = {
   //   method: 'POST',
   //   headers: {
@@ -29,6 +30,10 @@ const ProductDetails = () => {
       return <RouteError></RouteError>;
     }
     return <LoadingError value={error} />;
+  }
+
+  if(data?.type?.bundle, "bundle"){
+    return <ProductBundle product={data}/>
   }
   return (
     <div>

@@ -29,7 +29,7 @@ const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
     const submitForm = async (data) => {
         console.log('SUBMIT shipping');
         setIsShipping(false);
-        const responseAddShippingAddress = await addShippingAddress(basketId, shipmentId, data);
+        await addShippingAddress(basketId, shipmentId, data);
         const responseAddPutShippingMethod = await putShippingMethod(basketId, shipmentId, data.shipmentMethod);
         setCart(responseAddPutShippingMethod);
         localStorage.setItem('basket', JSON.stringify(responseAddPutShippingMethod));

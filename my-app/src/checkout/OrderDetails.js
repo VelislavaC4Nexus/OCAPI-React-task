@@ -1,5 +1,4 @@
 import { useCartContext } from "../contexts/CartContext";
-import ProductTile from "../cart/ProductTile";
 import { postOrder } from "../services/checkoutService";
 import { useNavigate } from "react-router-dom";
 import ProductTileCheckout from "./ProductTileCheckout";
@@ -13,8 +12,6 @@ const OrderDetails = () => {
     const placeOrderHandler = async () => {
         const responsePostOrder = await postOrder(basketId);
         localStorage.removeItem('basket');
-        setCart('');
-        // setNumberOfCartItems(0);
         setOrder(responsePostOrder);
         navigate('/order');
     };
