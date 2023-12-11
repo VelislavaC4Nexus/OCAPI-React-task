@@ -7,6 +7,7 @@ export const useCartContext = () => useContext(CartContext);
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('basket')));
     const [numberOfCartItems, setNumberOfCartItems] = useState(0);
+    const [order, setOrder] = useState(null);
     console.log(numberOfCartItems);
 
     useEffect(() => {
@@ -26,6 +27,8 @@ export const CartProvider = ({ children }) => {
                 setCart,
                 numberOfCartItems,
                 setNumberOfCartItems,
+                order,
+                setOrder
             }}
         >
             {children}

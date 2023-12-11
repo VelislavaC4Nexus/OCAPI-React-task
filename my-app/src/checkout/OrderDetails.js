@@ -1,15 +1,22 @@
 import { useCartContext } from "../contexts/CartContext";
 import ProductTile from "../cart/ProductTile";
 import { postOrder } from "../services/checkoutService";
+import { useNavigate } from "react-router-dom";
 
 const OrderDetails = () => {
-    const { cart } = useCartContext();
+    const navigate = useNavigate();
+    const { cart, setCart, setNumberOfCartItems, setOrder } = useCartContext();
     const basketId = cart?.basket_id;
     console.log(cart);
 
-    const placeOrderHandler=()=>{
-        const responsePostOrder = postOrder(basketId)
-    }
+    const placeOrderHandler = async () => {
+        const responsePostOrder = await postOrder(basketId);
+        localStorage.removeItem('basket');
+        setCart('');
+        setNumberOfCartItems(0);
+        setOrder(responsePostOrder);
+        navigate('/order');
+    };
 
     if (cart?.product_items.length) {
         return <>

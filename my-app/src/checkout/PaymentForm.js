@@ -5,8 +5,6 @@ import useFetch from "../hooks/useFetch";
 import Loading from '../components/Loading';
 import paymentFormValidationSchema from '../validations/paymentFormValidation';
 import { postPaymentInstrument, putBillingAddress } from '../services/checkoutService';
-import { useNavigate } from 'react-router-dom';
-
 
 const PaymentForm = ({ setIsReadyToOrder }) => {
     const { cart, setCart } = useCartContext();

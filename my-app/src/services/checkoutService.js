@@ -23,7 +23,7 @@ export const addShippingAddress = async (basketId, shipmentId, formData) => {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Something went wrong');
         }
 
         const data = await response.json();
@@ -50,7 +50,7 @@ export const putShippingMethod = async (basketId, shipmentId, shippingMethodId) 
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Something went wrong');
         }
 
         const data = await response.json();
@@ -61,6 +61,7 @@ export const putShippingMethod = async (basketId, shipmentId, shippingMethodId) 
 
     return shipmentMethods;
 };
+
 export const putBillingAddress = async (basketId, formData) => {
     const body = {
         "address1": formData.address,
@@ -87,7 +88,7 @@ export const putBillingAddress = async (basketId, formData) => {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Something went wrong');
         }
 
         const data = await response.json();
@@ -124,7 +125,7 @@ export const postPaymentInstrument = async (basketId, formData) => {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Something went wrong');
         }
 
         const data = await response.json();
@@ -135,18 +136,8 @@ export const postPaymentInstrument = async (basketId, formData) => {
 
     return responsePaymentInstrument;
 };
-export const postOrder = async (basketId, ) => {
-    // const body = {
-    //     "payment_card": {
-    //         "card_type": formData.cardType,
-    //         "number": formData.cardNumber,
-    //         "security_code": formData.securityCode,
-    //         "expiration_month": formData.expirationMonth,
-    //         "expiration_year": formData.expirationYear,
-    //     },
-    //     "payment_method_id": formData.paymentMethod
-    // };
 
+export const postOrder = async (basketId, ) => {
     const urlPostPaymentInstrument = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/orders`;
     let responsePostOrder;
 
@@ -161,9 +152,8 @@ export const postOrder = async (basketId, ) => {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Something went wrong');
         }
-
         const data = await response.json();
         responsePostOrder = { ...data };
     } catch (error) {
