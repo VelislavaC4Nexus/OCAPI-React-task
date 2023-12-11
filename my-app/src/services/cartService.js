@@ -1,6 +1,8 @@
+import { CREATE_BASKET, getAddProductToBasketUrl, getRemoveProductToBasketUrl } from "../utils/urlEndpoints";
+
 export const removeItemFromBasket = async (basketId, productId) => {
  
-    const urlAddShippingAddress = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/baskets/${basketId}/items/${productId}`;
+    const urlAddShippingAddress = getRemoveProductToBasketUrl(basketId,productId)
     let formresponse;
 
     try {
@@ -10,7 +12,6 @@ export const removeItemFromBasket = async (basketId, productId) => {
                 "Content-Type": "application/json",
                 "Authorization": localStorage.getItem('token'),
             },
-            
         });
 
         if (!response.ok) {
@@ -23,4 +24,57 @@ export const removeItemFromBasket = async (basketId, productId) => {
         throw new Error(error);
     }
     return formresponse;
+};
+
+export const addProductToBasket = async (basketId, productData) => {
+    const urlAddItemToBasket = getAddProductToBasketUrl(basketId);
+
+    const token = localStorage.getItem('token');
+    let basketWithItem;
+
+    try {
+        const response = await fetch(urlAddItemToBasket, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem('token'),
+            },
+            body: JSON.stringify(productData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Something went wrong!');
+        }
+
+        const data = await response.json();
+        basketWithItem = { ...data };
+    } catch (error) {
+        throw new Error(error);
+    }
+
+    console.log('basketWithItem', basketWithItem);
+    return basketWithItem;
+};
+
+export const createBasket = async () => {
+    let createdBasketData;
+    try {
+        const response = await fetch(CREATE_BASKET, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem('token'),
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Something went wrong!');
+        }
+        const data = await response.json();
+        createdBasketData = { ...data };
+    } catch (error) {
+        throw new Error(error);
+    }
+
+    return createdBasketData;
 };

@@ -16,16 +16,7 @@ const ProductBundle = ({ product }) => {
                 isOrderable={product?.inventory?.orderable}
             />
         </>);
-    //   }
 
-
-
-    // <><p>Product {product.name}</p>
-    //     <p>Product Id: {product.id}</p>
-    //     <p>Description: {product.short_description}</p>
-    //     <span>Price {product.price}</span>
-    //     <span>{product.currency}</span></>
-    // );
 };
 
 export default ProductBundle;

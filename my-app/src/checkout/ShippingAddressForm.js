@@ -5,13 +5,13 @@ import Loading from '../components/Loading';
 import { putShippingMethod, addShippingAddress } from '../services/checkoutService';
 import { useCartContext } from '../contexts/CartContext';
 import useFetch from '../hooks/useFetch';
+import { getShippingMethodsUrl } from '../utils/urlEndpoints';
 
 const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
     const { cart, setCart } = useCartContext();
     const shipmentId = cart?.shipments[0].shipment_id;
     const basketId = cart?.basket_id;
 
-    const urlGetShipmentMethod = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/baskets/${basketId}/shipments/${shipmentId}/shipping_methods`;
     const options = {
         method: "GET",
         headers: {
@@ -19,7 +19,7 @@ const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
             "Authorization": localStorage.getItem('token'),
         },
     };
-    const { data, isLoading } = useFetch(urlGetShipmentMethod, options);
+    const { data, isLoading } = useFetch(getShippingMethodsUrl(basketId, shipmentId), options);
 
 
     const { register, handleSubmit, formState: { errors } } = useForm({

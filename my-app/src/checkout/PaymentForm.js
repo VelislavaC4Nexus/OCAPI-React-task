@@ -5,6 +5,7 @@ import useFetch from "../hooks/useFetch";
 import Loading from '../components/Loading';
 import paymentFormValidationSchema from '../validations/paymentFormValidation';
 import { postPaymentInstrument, putBillingAddress } from '../services/checkoutService';
+import { getPaymetMethodsUrl } from '../utils/urlEndpoints';
 
 const PaymentForm = ({ setIsReadyToOrder }) => {
     const { cart, setCart } = useCartContext();
@@ -18,8 +19,7 @@ const PaymentForm = ({ setIsReadyToOrder }) => {
         },
     };
 
-    const urlPaymentMetods = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/baskets/${basketId}/payment_methods`;
-    const { data, isLoading } = useFetch(urlPaymentMetods, options);
+    const { data, isLoading } = useFetch(getPaymetMethodsUrl(basketId), options);
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(paymentFormValidationSchema)
@@ -28,7 +28,7 @@ const PaymentForm = ({ setIsReadyToOrder }) => {
     const submitForm = async (data) => {
         console.log('SUBMIT payment');
         console.log(data);
-        const responsePutBillingAddress = await putBillingAddress(basketId, data);
+        await putBillingAddress(basketId, data);
         const responsePostPaymentInstrument = await postPaymentInstrument(basketId, data);
         setCart(responsePostPaymentInstrument);
         localStorage.setItem('basket', JSON.stringify(responsePostPaymentInstrument));
@@ -38,7 +38,6 @@ const PaymentForm = ({ setIsReadyToOrder }) => {
     return (
         <>
             <div>Billing address:</div>
-
             <div>
                 <form onSubmit={handleSubmit(submitForm)}>
                     <label className="create__label" htmlFor="firstName">First Name:</label>

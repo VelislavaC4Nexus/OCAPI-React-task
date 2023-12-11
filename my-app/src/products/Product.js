@@ -9,7 +9,6 @@ const Product = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState({});
-  //const [isSelected, setIsSelected]=useState(false)
 
   useEffect(() => {
     setVariationAattributes(product.variation_attributes);
@@ -26,39 +25,9 @@ const Product = ({ product }) => {
       } else if (variationAttribute.name === 'Size') {
         initialOptions.Size = 'choose';
       }
-      // Add more conditions for other possible attributes if needed
     });
     setSelectedOptions(initialOptions);
   };
-
-  // const filterSelectedProduct = () => {
-
-  //   const variants = product.variants;
-  //   if (selectedOptions.Size || selectedOptions.Size !== 'choose') {
-  //     const filteredProduct = variants?.filter(v => v.variation_values.color === selectedOptions.Color && v.variation_values.size === selectedOptions.Size);
-  //     return filteredProduct;
-  //   }
-  //   console.log('variants', variants);
-  //   return "no product";
-  // };
-  // let filteredProduct;
-  // useEffect(() => {
-  // filteredProduct = filterSelectedProduct();
-  //   setSelectedProduct(filteredProduct); // Set the filtered product in state
-  // }, [selectedOptions]);
-  // console.log('filteredProduct', filteredProduct);
-
-
-  console.log(selectedOptions, 'selectedOptions 1');
-  const isSelected =
-    selectedOptions.Color && selectedOptions.Size ? true : false;
-
-  // const productSelected = variants?.find(
-  //   (v) =>
-  //     v.variation_values.color === selectedOptions.Color &&
-  //     v.variation_values.size === selectedOptions.Size
-  // );
-  // console.log(productSelected, 'productSelected');
 
   const handleVarOptionChange = (attributeName, value) => {
     console.log('changeOption');
@@ -67,34 +36,18 @@ const Product = ({ product }) => {
       [attributeName]: value,
     });
     const variants = product.variants;
-    console.log(selectedOptions, 'ffffffff 2');
-    
-      const filteredProduct = variants?.filter(v => v.variation_values.color === selectedOptions.Color && v.variation_values.size === selectedOptions.Size);
-      console.log(filteredProduct,'aaaaaaaaaaa 3');
-      if (filteredProduct) {
-console.log('filter');
-        setSelectedProduct(filteredProduct);
-        console.log(selectedProduct,'selectedProduct 4');
-      }
-    
-
+    const filteredProduct = variants?.filter(v => v.variation_values.color === selectedOptions.Color && v.variation_values.size === selectedOptions.Size);
+    if (filteredProduct) {
+      setSelectedProduct(filteredProduct);
+      console.log(selectedProduct, 'selectedProduct 4');
+    }
   };
 
   useEffect(() => {
     const variants = product.variants;
     const filteredProduct = variants?.filter(v => v.variation_values.color === selectedOptions.Color && v.variation_values.size === selectedOptions.Size);
-    // filteredProduct = filterSelectedProduct();
-      setSelectedProduct(filteredProduct); // Set the filtered product in state
-    }, [selectedOptions]);
-
-  console.log(selectedProduct,'selectedProduct 4');
-  console.log(selectedProduct[0]?.product_id,'selectedProduct[0]');
-  //console.log('selectedProduct', selectedProduct);
-  // if(filteredProduct){
-
-  //   console.log(filteredProduct&&filteredProduct[0].orderable, "orderable");
-  //   console.log(filteredProduct&&filteredProduct[0].product_id, "id");
-  // }
+    setSelectedProduct(filteredProduct);
+  }, [selectedOptions]);
 
   return (
     <>
@@ -118,11 +71,6 @@ console.log('filter');
         quantity={quantity}
         isOrderable={selectedProduct[0]?.orderable}
       />
-      {/* <AddToCartBtn
-        selectedProduct={selectedProduct? selectedProduct[0].product_id: null}
-        quantity={quantity}
-        isOrderable={selectedProduct? selectedProduct[0].orderable: null}
-      /> */}
 
       {product.image_groups && (
         <ProductCarousel images={product.image_groups[0].images} />

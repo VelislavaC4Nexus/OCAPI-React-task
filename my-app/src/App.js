@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 import { CartProvider } from './contexts/CartContext';
 import useAuth from './hooks/useAuth';
 import Header from './header/Header';
@@ -9,12 +8,10 @@ import RouteError from './components/RouteError';
 import Cart from './cart/Cart';
 import Checkout from './checkout/Checkout';
 import Order from './order/Order';
+import { AUTH_URL } from "./utils/urlEndpoints";
 
 function App() {
-  const authurl =
-    'https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/customers/auth';
-
-  useAuth(authurl);
+  useAuth(AUTH_URL);
   return (
     <div>
       <CartProvider>
@@ -22,7 +19,7 @@ function App() {
         <main>
           <Routes>
             <Route path='/'element={<RouteError />}></Route>
-            <Route path='/:id' element={<ProductDetails />}></Route>
+            <Route path='/:productId' element={<ProductDetails />}></Route>
             <Route path='/cart' element={<Cart />}></Route>
             <Route path='/checkout' element={<Checkout />}></Route>
             <Route path='/order' element={<Order />}></Route>

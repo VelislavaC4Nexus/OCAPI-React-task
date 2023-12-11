@@ -1,12 +1,15 @@
+import { useMemo } from "react";
 const Quantity = ({ quantity, setQuantity }) => {
-    const quantityValues = [1,2,3,4,5,6,7,8,9,10]
+    const quantityValues = useMemo(() => {
+        return Array.from({ length: 10 }, (_, index) => index + 1);
+    }, []);
 
     return (
         <div className="sort">
             <div className="sort-wrapper">
                 <label className="label">Quantity</label>
                 <select value={quantity} onChange={e => setQuantity(e.target.value)}>
-                    {quantityValues.map(q=><option value={q} key ={q}>{q}</option>)}
+                    {quantityValues.map(quantityValue => <option value={quantityValue} key={quantityValue}>{quantityValue}</option>)}
                 </select>
             </div>
         </div>

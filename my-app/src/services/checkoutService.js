@@ -1,15 +1,9 @@
+import { createShippingBillingAddressBody, createPaymentInstrumentBody } from "../utils/createBody";
+import { CREATE_ORDER, getAddBillingAddresToBasketUrl, getAddPaymentInstrumentToBasketUrl, getAddShippingAddresToBasketUrl, getShipmentMethodsUrl } from "../utils/urlEndpoints";
+
 export const addShippingAddress = async (basketId, shipmentId, formData) => {
-    const body = {
-        "address1": formData.address,
-        "city": formData.city,
-        "state_code": formData.stateCode,
-        "postal_code": formData.postalCode,
-        "country_code": formData.countryCode,
-        "first_name": formData.firstName,
-        "last_name": formData.lastName,
-        "phone": formData.phoneNumber
-    };
-    const urlAddShippingAddress = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/baskets/${basketId}/shipments/${shipmentId}/shipping_address`;
+    const body = createShippingBillingAddressBody(formData);
+    const urlAddShippingAddress = getAddShippingAddresToBasketUrl(basketId, shipmentId);
     let formresponse;
 
     try {
@@ -36,7 +30,7 @@ export const addShippingAddress = async (basketId, shipmentId, formData) => {
 
 export const putShippingMethod = async (basketId, shipmentId, shippingMethodId) => {
 
-    const urlGetShipmentMethod = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/baskets/${basketId}/shipments/${shipmentId}/shipping_method`;
+    const urlGetShipmentMethod = getShipmentMethodsUrl(basketId,shipmentId);
     let shipmentMethods;
 
     try {
@@ -63,18 +57,9 @@ export const putShippingMethod = async (basketId, shipmentId, shippingMethodId) 
 };
 
 export const putBillingAddress = async (basketId, formData) => {
-    const body = {
-        "address1": formData.address,
-        "city": formData.city,
-        "state_code": formData.stateCode,
-        "postal_code": formData.postalCode,
-        "country_code": formData.countryCode,
-        "first_name": formData.firstName,
-        "last_name": formData.lastName,
-        "phone": formData.phoneNumber
-    };
+    const body = createShippingBillingAddressBody(formData);
 
-    const urlPutBillingAddress = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/baskets/${basketId}/billing_address`;
+    const urlPutBillingAddress = getAddBillingAddresToBasketUrl(basketId);
     let responseBillingAddress;
 
     try {
@@ -100,18 +85,9 @@ export const putBillingAddress = async (basketId, formData) => {
     return responseBillingAddress;
 };
 export const postPaymentInstrument = async (basketId, formData) => {
-    const body = {
-        "payment_card": {
-            "card_type": formData.cardType,
-            "number": formData.cardNumber,
-            "security_code": formData.securityCode,
-            "expiration_month": formData.expirationMonth,
-            "expiration_year": formData.expirationYear,
-        },
-        "payment_method_id": formData.paymentMethod
-    };
+    const body = createPaymentInstrumentBody(formData);
 
-    const urlPostPaymentInstrument = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/baskets/${basketId}/payment_instruments`;
+    const urlPostPaymentInstrument = getAddPaymentInstrumentToBasketUrl(basketId);
     let responsePaymentInstrument;
 
     try {
@@ -137,18 +113,17 @@ export const postPaymentInstrument = async (basketId, formData) => {
     return responsePaymentInstrument;
 };
 
-export const postOrder = async (basketId, ) => {
-    const urlPostPaymentInstrument = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/orders`;
+export const postOrder = async (basketId,) => {
     let responsePostOrder;
 
     try {
-        const response = await fetch(urlPostPaymentInstrument, {
+        const response = await fetch(CREATE_ORDER, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": localStorage.getItem('token'),
             },
-            body: JSON.stringify({"basket_id": basketId})
+            body: JSON.stringify({ "basket_id": basketId })
         });
 
         if (!response.ok) {

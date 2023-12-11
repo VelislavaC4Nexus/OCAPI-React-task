@@ -1,18 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import { useCartContext } from "../contexts/CartContext";
 import { postOrder } from "../services/checkoutService";
-import { useNavigate } from "react-router-dom";
 import ProductTileCheckout from "./ProductTileCheckout";
 
 const OrderDetails = () => {
     const navigate = useNavigate();
-    const { cart, setCart, setOrder } = useCartContext();
+    const { cart, setOrder, setCart } = useCartContext();
     const basketId = cart?.basket_id;
-    console.log(cart);
 
     const placeOrderHandler = async () => {
         const responsePostOrder = await postOrder(basketId);
         localStorage.removeItem('basket');
         setOrder(responsePostOrder);
+        setCart({});
         navigate('/order');
     };
 
@@ -38,7 +38,6 @@ const OrderDetails = () => {
 
             <button onClick={placeOrderHandler}>Place Order</button>
         </>;
-
     }
     return <p>no products in the cart</p>;
 };
