@@ -1,6 +1,5 @@
 
 const Loading = ({ message }) => {
-    console.log('loading');
     if (message) {
         return <div>{message}</div>;
     }

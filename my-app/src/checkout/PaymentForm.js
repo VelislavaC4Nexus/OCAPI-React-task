@@ -26,12 +26,9 @@ const PaymentForm = ({ setIsReadyToOrder }) => {
     });
 
     const submitForm = async (data) => {
-        console.log('SUBMIT payment');
-        console.log(data);
         await putBillingAddress(basketId, data);
         const responsePostPaymentInstrument = await postPaymentInstrument(basketId, data);
         setCart(responsePostPaymentInstrument);
-        localStorage.setItem('basket', JSON.stringify(responsePostPaymentInstrument));
         setIsReadyToOrder(true);
     };
 

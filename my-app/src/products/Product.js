@@ -5,7 +5,6 @@ import Quantity from './SelectQuantity';
 import AddToCartBtn from './AddToCartBtn';
 
 const Product = ({ product }) => {
-  console.log(product);
   const [variationAattributes, setVariationAattributes] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -31,7 +30,6 @@ const Product = ({ product }) => {
   };
 
   const handleVarOptionChange = (attributeName, value) => {
-    console.log('changeOption');
     setSelectedOptions({
       ...selectedOptions,
       [attributeName]: value,
@@ -40,7 +38,6 @@ const Product = ({ product }) => {
     const filteredProduct = variants?.filter(v => v.variation_values.color === selectedOptions.Color && v.variation_values.size === selectedOptions.Size);
     if (filteredProduct) {
       setSelectedProduct(filteredProduct);
-      console.log(selectedProduct, 'selectedProduct 4');
     }
   };
 

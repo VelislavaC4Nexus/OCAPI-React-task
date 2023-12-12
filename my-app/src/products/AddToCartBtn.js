@@ -1,35 +1,28 @@
-import { useEffect } from "react";
 import { useCartContext } from "../contexts/CartContext";
-import { addProductToBasket } from "../services/cartService";
+import { addProductToBasket, getExistingBasket } from "../services/cartService";
 import { createBasket } from "../services/cartService";
 
-const basketExists = () => localStorage.getItem('basket') !== null;
 
 const AddToCartBtn = ({ selectedProduct, quantity, isOrderable }) => {
     const { setCart } = useCartContext();
 
-    useEffect(() => {
-        if (basketExists()) {
-            setCart((JSON.parse(localStorage.getItem('basket'))));
-        }
-
-    }, []);
+    const basketExists = () => localStorage.getItem('basket') !== null;
 
     const addToCartHandler = async () => {
-
+        let basket;
         if (!basketExists()) {
-            const newBasket = await createBasket();
-            localStorage.setItem('basket', JSON.stringify(newBasket));
+            basket = await createBasket();
+            localStorage.setItem('basket', JSON.stringify(basket.basket_id));
+        } else {
+            basket = await getExistingBasket(JSON.parse(localStorage.getItem('basket')).toString());
         }
-
         const productData = [
             {
                 product_id: selectedProduct,
                 quantity: Number(quantity)
             }
         ];
-        const newItemToBasket = await addProductToBasket(JSON.parse(localStorage.getItem('basket')).basket_id, productData);
-        localStorage.setItem('basket', JSON.stringify(newItemToBasket));
+        const newItemToBasket = await addProductToBasket(JSON.parse(localStorage.getItem('basket')), productData);
         setCart(newItemToBasket);
     };
 

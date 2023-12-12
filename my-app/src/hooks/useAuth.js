@@ -24,7 +24,6 @@ const useAuth = (url) => {
 
       fetch(url, { ...optionsAuth, signal })
         .then((response) => {
-          console.log('responseAUth', response.headers.get('authorization'));
           setToken(response.headers.get('authorization'));
           if (!response.ok) {
             if (response.status === 404) {

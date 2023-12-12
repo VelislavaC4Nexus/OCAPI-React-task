@@ -39,6 +39,10 @@ export const getShippingMethodsUrl = (basketId,shipmentId)=>{
 export const getContentAssetUrl = (contentAssetId)=>{
     return `${BASE_URL}/content/${contentAssetId}?client_id=${urlConstants().CLIENT_ID}`
 }
+export const getBasket = (basketId)=>{
+    return `${BASE_URL}/baskets/${basketId}`
+}
+
 
 
 

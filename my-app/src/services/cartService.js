@@ -52,7 +52,6 @@ export const addProductToBasket = async (basketId, productData) => {
         throw new Error(error);
     }
 
-    console.log('basketWithItem', basketWithItem);
     return basketWithItem;
 };
 
@@ -78,3 +77,27 @@ export const createBasket = async () => {
 
     return createdBasketData;
 };
+export const getExistingBasket = async (basketId) => {
+    let basketData;
+    const url = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/baskets/${basketId}`;
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem('token'),
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Something went wrong!');
+        }
+        const data = await response.json();
+        basketData = { ...data };
+    } catch (error) {
+        throw new Error(error);
+    }
+
+    return basketData;
+};
+

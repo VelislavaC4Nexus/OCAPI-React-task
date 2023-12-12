@@ -4,7 +4,6 @@ import Quantity from "./SelectQuantity";
 import AddToCartBtn from "./AddToCartBtn";
 
 const ProductBundle = ({ product }) => {
-    console.log(product);
     const [quantity, setQuantity] = useState(1);
 
     return (

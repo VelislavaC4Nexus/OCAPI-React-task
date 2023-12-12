@@ -5,9 +5,8 @@ const CartContext = createContext();
 export const useCartContext = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState(JSON.parse(localStorage.getItem('basket')));
+    const [cart, setCart] = useState({});//JSON.parse(localStorage.getItem('basket'))
     const [order, setOrder] = useState(null);
-
     let totalQuantity;
     if (cart && cart.product_items?.length) {
         totalQuantity = cart.product_items.reduce((acc, item) => acc + item.quantity, 0);

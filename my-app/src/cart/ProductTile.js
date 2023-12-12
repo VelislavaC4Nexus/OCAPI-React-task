@@ -6,7 +6,6 @@ const ProductTile = ({ item }) => {
     const basketId = cart?.basket_id;
     const removeItemHandler = async (productId) => {
         const responseRemoveItemFromBasket = await removeItemFromBasket(basketId, productId);
-        localStorage.setItem('basket', JSON.stringify(responseRemoveItemFromBasket));
         setCart(responseRemoveItemFromBasket);
     };
     return (
