@@ -1,4 +1,4 @@
-import { CREATE_BASKET, getAddProductToBasketUrl, getRemoveProductToBasketUrl } from "../utils/urlEndpoints";
+import { CREATE_BASKET, getAddProductToBasketUrl, getBasketUrl, getRemoveProductToBasketUrl } from "../utils/urlEndpoints";
 
 export const removeItemFromBasket = async (basketId, productId) => {
 
@@ -79,9 +79,8 @@ export const createBasket = async () => {
 };
 export const getExistingBasket = async (basketId) => {
     let basketData;
-    const url = `https://zydc-004.dx.commercecloud.salesforce.com/s/RefArch/dw/shop/v23_2/baskets/${basketId}`;
     try {
-        const response = await fetch(url, {
+        const response = await fetch(getBasketUrl(basketId), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
