@@ -13,31 +13,27 @@ const ProductVariantAttributes = ({
     }
   });
 
-  console.log('varOption', varOption);
-  //   console.log("var1",variationAattribute.values[0].name);
   const handleVarOptionChange = (value) => {
     setVarOption(value);
     onVarOptionChange(value);
   };
 
   return (
-    <div>
-      <div>
-        <label>{variationAattribute.name}</label>
-        <select
-          value={varOption}
-          onChange={(e) => handleVarOptionChange(e.target.value)}
-        >
-          {variationAattribute.name === "Size" ? <option value="choose" disabled>
-            choose
-          </option> : null}
-          {variationAattribute.values?.map((option) => (
-            <option value={option.value} key={option.value}>
-              {option.name}
-            </option>
-          ))}
-        </select>
-      </div>
+    <div className='pb-3'>
+      <label className='fw-bold pr-2'>Select {variationAattribute.name}:  </label>
+      <select className='ml-2'
+        value={varOption}
+        onChange={(e) => handleVarOptionChange(e.target.value)}
+      >
+        {variationAattribute.name === "Size" ? <option value="choose" disabled>
+          choose
+        </option> : null}
+        {variationAattribute.values?.map((option) => (
+          <option value={option.value} key={option.value}>
+            {option.name}
+          </option>
+        ))}
+      </select>
     </div>
   );
 };

@@ -5,13 +5,11 @@ const Quantity = ({ quantity, setQuantity }) => {
     }, []);
 
     return (
-        <div className="sort">
-            <div className="sort-wrapper">
-                <label className="label">Quantity</label>
-                <select value={quantity} onChange={e => setQuantity(e.target.value)}>
-                    {quantityValues.map(quantityValue => <option value={quantityValue} key={quantityValue}>{quantityValue}</option>)}
-                </select>
-            </div>
+        <div className="mb-3">
+            <label className="fw-bold">Select Quantity:</label>
+            <select value={quantity} onChange={e => setQuantity(e.target.value)}>
+                {quantityValues.map(quantityValue => <option value={quantityValue} key={quantityValue}>{quantityValue}</option>)}
+            </select>
         </div>
     );
 };

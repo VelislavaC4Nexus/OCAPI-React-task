@@ -36,112 +36,129 @@ const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
 
     };
     return (<>
-        <div>Shipping address:</div>
+        <h3>Shipping Address:</h3>
 
         <div>
             <form onSubmit={handleSubmit(submitForm)}>
+                <div className="row">
+                    <div className="col-6">
 
-                <label className="create__label" htmlFor="firstName">First Name:</label>
-                <span className="input">
+                        <div className='p-2'>
+                            <label className="form-label" htmlFor="firstName">First Name:</label>
+                            <input
+                                className='form-control'
+                                id="firstName"
+                                placeholder="First Name:"
+                                {...register('firstName')}
+                            />
+                            {errors.firstName && <p className="form-text text-danger">{errors.firstName.message}</p>}
+                        </div>
+
+                        <div className='p-2'>
+                            <label className="form-label" htmlFor="lastName">Last Name:</label>
+                            <input
+                                className='form-control'
+                                id='lastName'
+                                placeholder="Last Name:"
+                                {...register('lastName')}
+                            />
+                            {errors.lastName && <p className="form-text text-danger">{errors.lastName.message}</p>}
+                        </div>
+
+                        <div className='p-2'>
+                            <label className="form-label" htmlFor="address">Address:</label>
+                            <input
+                                className='form-control'
+                                id="address"
+                                placeholder="Address:"
+                                {...register('address')}
+                            />
+                            {errors.address && <p className="form-text text-danger">{errors.address.message}</p>}
+                        </div>
+                        <div className='p-2'>
+                            <label className="form-label" htmlFor="city">City:</label>
+                            <input
+                                className='form-control'
+                                id="city"
+                                placeholder="City:"
+                                {...register('city')}
+                            />
+                            {errors.city && <p className="form-text  text-danger">{errors.city.message}</p>}
+                        </div>
+                    </div>
+                    <div className="col-6">
+                        <div className='p-2'>
+                            <label className="form-label" htmlFor="countryCode">Country Code:</label>
+                            <input
+                                className='form-control'
+                                id="countryCode"
+                                placeholder="Country Code:"
+                                {...register('countryCode')}
+                            />
+                            {errors.countryCode && <p className="form-text  text-danger">{errors.countryCode.message}</p>}
+                        </div>
+
+                        <div className='p-2'>
+                            <label className="form-label" htmlFor="postalCode">Postal Code:</label>
+                            <input
+                                className='form-control'
+                                id="postalCode"
+                                placeholder="Postal Code:"
+                                {...register('postalCode')}
+                            />
+                            {errors.postalCode && <p className="form-text  text-danger">{errors.postalCode.message}</p>}
+                        </div>
+
+                        <div className='p-2'>
+                            <label className="form-label" htmlFor="stateCode">State Code:</label>
+                            <input
+                                className='form-control'
+                                id="stateCode"
+                                placeholder="State Code:"
+                                {...register('stateCode')}
+                            />
+                            {errors.stateCode && <p className="form-text text-danger">{errors.stateCode.message}</p>}
+                        </div>
+
+                        <div className='p-2'>
+                            <label className="form-label" htmlFor="phoneNumber">Phone Number:</label>
+                            <input
+                                className='form-control'
+                                id='phoneNumber'
+                                placeholder="Phone Number:"
+                                {...register('phoneNumber')}
+                            />
+                            {errors.phoneNumber && <p className="form-text  text-danger">{errors.phoneNumber.message}</p>}
+                        </div>
+
+                    </div>
+                    <div className="col-12">
+
+                        <div className='p-2 mb-4'>
+                            {isLoading ? <Loading /> :
+                                <label className='form-label'>
+                                    Select Shipment Method
+                                    <select className='form-select' {...register('shipmentMethod')}>
+                                        <option value=''>
+                                            please select method
+                                        </option>
+                                        {data.applicable_shipping_methods?.map((method) => (
+                                            <option value={method?.id} key={method?.name}>
+                                                {method.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>}
+                            {errors.shipmentMethod && <p className="form-text  text-danger">{errors.shipmentMethod.message}</p>}
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div >
                     <input
-                        id="firstName"
-                        placeholder="First Name:"
-                        {...register('firstName')}
-                    />
-                </span>
-
-                {errors.firstName && <p className="login__errors">{errors.firstName.message}</p>}
-
-                <label className="create__label" htmlFor="lastName">Last Name:</label>
-                <span className="input">
-                    <input
-                        id='lastName'
-                        placeholder="Last Name:"
-                        {...register('lastName')}
-                    />
-                </span>
-                {errors.lastName && <p className="login__errors">{errors.lastName.message}</p>}
-
-                <label className="create__label" htmlFor="address">Address:</label>
-                <span className="input">
-                    <input
-                        id="address"
-                        placeholder="Address:"
-                        {...register('address')}
-                    />
-                </span>
-                {errors.address && <p className="login__errors">{errors.address.message}</p>}
-
-
-                <label className="create__label" htmlFor="city">City:</label>
-                <span className="input">
-                    <input
-                        id="city"
-                        placeholder="City:"
-                        {...register('city')}
-                    />
-                </span>
-                {errors.city && <p className="login__errors">{errors.city.message}</p>}
-
-                <label className="create__label" htmlFor="countryCode">Country Code:</label>
-                <span className="input">
-                    <input
-                        id="countryCode"
-                        placeholder="Country Code:"
-                        {...register('countryCode')}
-                    />
-                </span>
-                {errors.countryCode && <p className="login__errors">{errors.countryCode.message}</p>}
-
-                <label className="create__label" htmlFor="postalCode">Postal Code:</label>
-                <span className="input">
-                    <input
-                        id="postalCode"
-                        placeholder="Postal Code:"
-                        {...register('postalCode')}
-                    />
-                </span>
-                {errors.postalCode && <p className="login__errors">{errors.postalCode.message}</p>}
-
-                <label className="create__label" htmlFor="stateCode">State Code:</label>
-                <span className="input">
-                    <input
-                        id="stateCode"
-                        placeholder="State Code:"
-                        {...register('stateCode')}
-                    />
-                </span>
-                {errors.stateCode && <p className="login__errors">{errors.stateCode.message}</p>}
-
-                <label className="create__label" htmlFor="phoneNumber">Phone Number:</label>
-                <span className="input">
-                    <input
-                        id='phoneNumber'
-                        placeholder="Phone Number:"
-                        {...register('phoneNumber')}
-                    />
-                </span>
-                {errors.phoneNumber && <p className="login__errors">{errors.phoneNumber.message}</p>}
-
-                {isLoading ? <Loading /> :
-                    <label>
-                        Select Shipment Method
-                        <select {...register('shipmentMethod')}>
-                            <option value=''>
-                                please select method
-                            </option>
-                            {data.applicable_shipping_methods?.map((method) => (
-                                <option value={method?.id} key={method?.name}>
-                                    {method.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label>}
-                {errors.shipmentMethod && <p className="login__errors">{errors.shipmentMethod.message}</p>}
-
-                <div className="">
-                    <input
-                        className="button submit"
+                        className="btn btn-primary"
                         type="submit"
                         value="Add Shipping Address"
                     />

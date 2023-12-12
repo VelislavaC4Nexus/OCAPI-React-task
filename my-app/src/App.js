@@ -13,22 +13,20 @@ import { AUTH_URL } from "./utils/urlEndpoints";
 function App() {
   useAuth(AUTH_URL);
   return (
-    <div>
-      <CartProvider>
-        <Header />
-        <main>
-          <Routes>
-            <Route path='/'element={<RouteError />}></Route>
-            <Route path='/:productId' element={<ProductDetails />}></Route>
-            <Route path='/cart' element={<Cart />}></Route>
-            <Route path='/checkout' element={<Checkout />}></Route>
-            <Route path='/order' element={<Order />}></Route>
-            <Route path="*" element={<RouteError />}></Route>
-          </Routes>
-        </main>
-        <Footer />
-      </CartProvider>
-    </div >
+    <CartProvider>
+      <Header />
+      <main className="container-lg">
+        <Routes>
+          <Route path='/' element={<RouteError />}></Route>
+          <Route path='/:productId' element={<ProductDetails />}></Route>
+          <Route path='/cart' element={<Cart />}></Route>
+          <Route path='/checkout' element={<Checkout />}></Route>
+          <Route path='/order' element={<Order />}></Route>
+          <Route path="*" element={<RouteError />}></Route>
+        </Routes>
+      </main>
+      <Footer />
+    </CartProvider>
   );
 }
 

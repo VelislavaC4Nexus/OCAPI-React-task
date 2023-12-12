@@ -6,10 +6,10 @@ export const urlConstants = () => {
     const OCAPI_API = 'dw/shop';
 
     return {
-        OCAPI_HOST, 
-        OCAPI_VERSION, 
-        CLIENT_ID, 
-        SITE, 
+        OCAPI_HOST,
+        OCAPI_VERSION,
+        CLIENT_ID,
+        SITE,
         OCAPI_API
     };
 };

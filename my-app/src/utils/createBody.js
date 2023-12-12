@@ -8,8 +8,8 @@ export const createShippingBillingAddressBody = (formData) => {
         "first_name": formData.firstName,
         "last_name": formData.lastName,
         "phone": formData.phoneNumber
-    }
-}
+    };
+};
 
 export const createPaymentInstrumentBody = (formData) => {
     return {
@@ -21,5 +21,5 @@ export const createPaymentInstrumentBody = (formData) => {
             "expiration_year": formData.expirationYear,
         },
         "payment_method_id": formData.paymentMethod
-    }
-}
+    };
+};

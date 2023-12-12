@@ -16,7 +16,7 @@ const AddToCartBtn = ({ selectedProduct, quantity, isOrderable }) => {
     }, []);
 
     const addToCartHandler = async () => {
-   
+
         if (!basketExists()) {
             const newBasket = await createBasket();
             localStorage.setItem('basket', JSON.stringify(newBasket));
@@ -32,14 +32,14 @@ const AddToCartBtn = ({ selectedProduct, quantity, isOrderable }) => {
         localStorage.setItem('basket', JSON.stringify(newItemToBasket));
         setCart(newItemToBasket);
     };
-    
+
     if (selectedProduct) {
         if (isOrderable) {
-            return <button onClick={addToCartHandler}>Add to Cart</button>;
+            return <button className="btn btn-primary" onClick={addToCartHandler}>Add to Cart</button>;
         }
         return <p>Product is not available.</p>;
     } else {
-        return <p>Select product.</p>;
+        return <button className="btn btn-primary" onClick={addToCartHandler} disabled>Add to Cart</button>;
     }
 };
 

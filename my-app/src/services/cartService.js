@@ -1,8 +1,8 @@
 import { CREATE_BASKET, getAddProductToBasketUrl, getRemoveProductToBasketUrl } from "../utils/urlEndpoints";
 
 export const removeItemFromBasket = async (basketId, productId) => {
- 
-    const urlAddShippingAddress = getRemoveProductToBasketUrl(basketId,productId)
+
+    const urlAddShippingAddress = getRemoveProductToBasketUrl(basketId, productId);
     let formresponse;
 
     try {

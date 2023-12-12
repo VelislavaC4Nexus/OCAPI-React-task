@@ -7,11 +7,12 @@ const useFetch = (url, options) => {
 
   useEffect(() => {
     const abortController = new AbortController();
+    const { signal } = abortController;
     const fetchData = () => {
       setIsLoading(true);
       setError(null);
 
-      fetch(url, options)
+      fetch(url, { ...options, signal })
         .then((response) => {
           if (!response.ok) {
             if (response.status === 404) {

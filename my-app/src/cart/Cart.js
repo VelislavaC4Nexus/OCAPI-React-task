@@ -1,34 +1,26 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useCartContext } from "../contexts/CartContext";
 import ProductTile from "./ProductTile";
 
 const Cart = () => {
     const { cart } = useCartContext();
-    console.log(cart);
-    const navigate = useNavigate()
-    const goToCheckoutHandler=()=>{
-navigate('/checkout')
-    }
-    // console.log(Array.isArray(cart.product_items), 'cart');
+    const navigate = useNavigate();
+    const goToCheckoutHandler = () => {
+        navigate('/checkout');
+    };
     if (cart && cart.product_items) {
         return <>
-            <div>Cart</div>
-            <div>{cart.product_items.map(item => <ProductTile item={item} key={item.item_id} />)}</div>
-       
-            <button onClick={goToCheckoutHandler}>Go to Checkout</button>
+            <h3 className="fw-bold">Your Cart</h3>
+            <div className="pb-3">{cart.product_items.map(item => <ProductTile item={item} key={item.item_id} />)}</div>
+            <button className="btn btn-primary" onClick={goToCheckoutHandler}>Go to Checkout</button>
         </>;
-
     }
-    return <p>no products in the cart</p>;
-
-    // (cart.product_items.map(item=>{
-    //     <ProductTile 
-    //     key={item.item_id} 
-    //    item={item}
-    //     />
-    // })
-    // );
-
+    return (
+        <>
+            <p className="fw-bold">Your cart is empty! </p>
+            <Link to="/sony-ps3-bundleM">Choose product</Link>
+        </>
+    );
 };
 
 export default Cart;

@@ -5,7 +5,7 @@ import LoadingError from '../components/LoadingError';
 import RouteError from '../components/RouteError';
 import Product from './Product';
 import ProductBundle from './ProductBundle';
-import {  getProductUrl } from '../utils/urlEndpoints';
+import { getProductUrl } from '../utils/urlEndpoints';
 
 const ProductDetails = () => {
   const { productId } = useParams();

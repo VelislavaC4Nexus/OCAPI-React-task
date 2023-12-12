@@ -5,6 +5,7 @@ import Quantity from './SelectQuantity';
 import AddToCartBtn from './AddToCartBtn';
 
 const Product = ({ product }) => {
+  console.log(product);
   const [variationAattributes, setVariationAattributes] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -51,30 +52,36 @@ const Product = ({ product }) => {
 
   return (
     <>
-      <p>Product {product.name}</p>
-      <p>Product Id: {product.id}</p>
-      <p>Description: {product.short_description}</p>
-      <span>Price {product.price}</span>
-      <span>{product.currency}</span>
-      {variationAattributes?.map((attribute) => (
-        <ProductVariantAttributes
-          variationAattribute={attribute}
-          key={attribute.id}
-          onVarOptionChange={(value) =>
-            handleVarOptionChange(attribute.name, value)
-          }
-        />
-      ))}
-      <Quantity quantity={quantity} setQuantity={setQuantity} />
-      <AddToCartBtn
-        selectedProduct={selectedProduct[0]?.product_id}
-        quantity={quantity}
-        isOrderable={selectedProduct[0]?.orderable}
-      />
+      <h3 className="pb-3">Product: {product.name}</h3>
+      <p className='pb-1'><span className="fw-bold">Product Id: </span><span>{product.id}</span></p>
+      <p className='pb-1'><span className="fw-bold">Description: </span>{product.short_description}</p>
 
-      {product.image_groups && (
-        <ProductCarousel images={product.image_groups[0].images} />
-      )}
+      <div className="row">
+        <div className="col-2">
+
+          <p className='pb-1'><span className="fw-bold">Price: </span>{product.price}<span>{product.currency}</span></p>
+          {variationAattributes?.map((attribute) => (
+            <ProductVariantAttributes
+              variationAattribute={attribute}
+              key={attribute.id}
+              onVarOptionChange={(value) =>
+                handleVarOptionChange(attribute.name, value)
+              }
+            />
+          ))}
+          <Quantity quantity={quantity} setQuantity={setQuantity} />
+          <AddToCartBtn
+            selectedProduct={selectedProduct[0]?.product_id}
+            quantity={quantity}
+            isOrderable={selectedProduct[0]?.orderable}
+          />
+        </div>
+        <div className="col-6">
+          {product.image_groups && (
+            <ProductCarousel images={product.image_groups[0].images} />
+          )}
+        </div>
+      </div>
     </>
   );
 };

@@ -31,7 +31,7 @@ const shippingFormValidationSchema = yup.object().shape({
   shipmentMethod: yup
     .string()
     .required("Please select Shipment Method!"),
- 
+
 });
 
 export default shippingFormValidationSchema;

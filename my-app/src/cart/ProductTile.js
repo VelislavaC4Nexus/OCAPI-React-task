@@ -2,25 +2,27 @@ import { useCartContext } from "../contexts/CartContext";
 import { removeItemFromBasket } from "../services/cartService";
 
 const ProductTile = ({ item }) => {
-    const { cart,setCart } = useCartContext();
+    const { cart, setCart } = useCartContext();
     const basketId = cart?.basket_id;
-    const removeItemHandler =async(productId) => {
-        console.log(productId);
-         const responseRemoveItemFromBasket =await removeItemFromBasket(basketId,productId);
-         console.log(responseRemoveItemFromBasket);
-         localStorage.setItem('basket', JSON.stringify(responseRemoveItemFromBasket));
-         setCart(responseRemoveItemFromBasket)
-
+    const removeItemHandler = async (productId) => {
+        const responseRemoveItemFromBasket = await removeItemFromBasket(basketId, productId);
+        localStorage.setItem('basket', JSON.stringify(responseRemoveItemFromBasket));
+        setCart(responseRemoveItemFromBasket);
     };
     return (
-        //<div>ProductTile</div>
         <>
-            <p>Product id: {item.product_id}</p>
-            <p>Product name: {item.product_name}</p>
-            <p>Product quantity: {item.quantity}</p>
-            <p>Single price: {item.base_price} {cart.currency}</p>
-            <p>Total price after discoutn: {item.price_after_item_discount} {cart.currency}</p>
-            <button onClick={() => removeItemHandler(item.item_id)}>Remove Item</button>
+            <div className="row border-bottom border-primary p-3">
+                <div className="col-5">
+                    <p><span className="fw-bold">Product id:</span> {item.product_id}</p>
+                    <p><span className="fw-bold">Product name:</span> {item.product_name}</p>
+                    <p><span className="fw-bold">Product quantity: </span>{item.quantity}</p>
+                    <p><span className="fw-bold">Single price:</span> {item.base_price} {cart.currency}</p>
+                    <p><span className="fw-bold">Total price after discoutn:</span> {item.price_after_item_discount} {cart.currency}</p>
+                </div>
+                <div className="col-6">
+                    <button className="btn btn-danger" onClick={() => removeItemHandler(item.item_id)}>Remove Item</button>
+                </div>
+            </div>
         </>
     );
 

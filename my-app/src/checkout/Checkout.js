@@ -5,16 +5,16 @@ import OrderDetails from './OrderDetails';
 
 const Checkout = () => {
     const [isShipping, setIsShipping] = useState(true);
-    const [isReadyToOrder, setIsReadyToOrder]=useState(false);
+    const [isReadyToOrder, setIsReadyToOrder] = useState(false);
     console.log(isShipping);
     console.log(isReadyToOrder);
- 
+
     if (isShipping) {
         return <ShippingAddressForm setIsShipping={setIsShipping} />;
-    } else if(!isShipping && !isReadyToOrder){
-        return <PaymentForm setIsReadyToOrder={setIsReadyToOrder}/>;
-    }else if(isReadyToOrder){
-        return <OrderDetails />
+    } else if (!isShipping && !isReadyToOrder) {
+        return <PaymentForm setIsReadyToOrder={setIsReadyToOrder} />;
+    } else if (isReadyToOrder) {
+        return <OrderDetails />;
     }
 };
 

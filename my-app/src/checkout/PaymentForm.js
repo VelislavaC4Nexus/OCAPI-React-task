@@ -37,188 +37,210 @@ const PaymentForm = ({ setIsReadyToOrder }) => {
 
     return (
         <>
-            <div>Billing address:</div>
-            <div>
-                <form onSubmit={handleSubmit(submitForm)}>
-                    <label className="create__label" htmlFor="firstName">First Name:</label>
-                    <span className="input">
-                        <input
-                            id="firstName"
-                            placeholder="First Name:"
-                            {...register('firstName')}
-                        />
-                    </span>
+            <form onSubmit={handleSubmit(submitForm)}>
+                <div className="row">
+                    <div className="col-6">
+                        <h3>Billing Address</h3>
+                        <label className="form-label" htmlFor="firstName">First Name:</label>
+                        <span className="input">
+                            <input
+                                className="form-control"
+                                id="firstName"
+                                placeholder="First Name:"
+                                {...register('firstName')}
+                            />
+                        </span>
+                        {errors.firstName && <p className="form-text text-danger">{errors.firstName.message}</p>}
 
-                    {errors.firstName && <p className="login__errors">{errors.firstName.message}</p>}
+                        <label className="form-label" htmlFor="lastName">Last Name:</label>
+                        <span className="input">
+                            <input
+                                className="form-control"
+                                id='lastName'
+                                placeholder="Last Name:"
+                                {...register('lastName')}
+                            />
+                        </span>
+                        {errors.lastName && <p className="form-text text-danger">{errors.lastName.message}</p>}
 
-                    <label className="create__label" htmlFor="lastName">Last Name:</label>
-                    <span className="input">
-                        <input
-                            id='lastName'
-                            placeholder="Last Name:"
-                            {...register('lastName')}
-                        />
-                    </span>
-                    {errors.lastName && <p className="login__errors">{errors.lastName.message}</p>}
+                        <label className="form-label" htmlFor="address">Address:</label>
+                        <span className="input">
+                            <input
+                                className="form-control"
 
-                    <label className="create__label" htmlFor="address">Address:</label>
-                    <span className="input">
-                        <input
-                            id="address"
-                            placeholder="Address:"
-                            {...register('address')}
-                        />
-                    </span>
-                    {errors.address && <p className="login__errors">{errors.address.message}</p>}
+                                id="address"
+                                placeholder="Address:"
+                                {...register('address')}
+                            />
+                        </span>
+                        {errors.address && <p className="form-text text-danger">{errors.address.message}</p>}
 
+                        <label className="form-label" htmlFor="city">City:</label>
+                        <span className="input">
+                            <input
+                                className="form-control"
+                                id="city"
+                                placeholder="City:"
+                                {...register('city')}
+                            />
+                        </span>
+                        {errors.city && <p className="form-text text-danger">{errors.city.message}</p>}
 
-                    <label className="create__label" htmlFor="city">City:</label>
-                    <span className="input">
-                        <input
-                            id="city"
-                            placeholder="City:"
-                            {...register('city')}
-                        />
-                    </span>
-                    {errors.city && <p className="login__errors">{errors.city.message}</p>}
+                        <label className="form-label" htmlFor="countryCode">Country Code:</label>
+                        <span className="input">
+                            <input
+                                className="form-control"
+                                id="countryCode"
+                                placeholder="Country Code:"
+                                {...register('countryCode')}
+                            />
+                        </span>
+                        {errors.countryCode && <p className="form-text text-danger">{errors.countryCode.message}</p>}
 
-                    <label className="create__label" htmlFor="countryCode">Country Code:</label>
-                    <span className="input">
-                        <input
-                            id="countryCode"
-                            placeholder="Country Code:"
-                            {...register('countryCode')}
-                        />
-                    </span>
-                    {errors.countryCode && <p className="login__errors">{errors.countryCode.message}</p>}
+                        <label className="form-label" htmlFor="postalCode">Postal Code:</label>
+                        <span className="input">
+                            <input
+                                className="form-control"
+                                id="postalCode"
+                                placeholder="Postal Code:"
+                                {...register('postalCode')}
+                            />
+                        </span>
+                        {errors.postalCode && <p className="form-text text-danger">{errors.postalCode.message}</p>}
 
-                    <label className="create__label" htmlFor="postalCode">Postal Code:</label>
-                    <span className="input">
-                        <input
-                            id="postalCode"
-                            placeholder="Postal Code:"
-                            {...register('postalCode')}
-                        />
-                    </span>
-                    {errors.postalCode && <p className="login__errors">{errors.postalCode.message}</p>}
+                        <label className="form-label" htmlFor="stateCode">State Code:</label>
+                        <span className="input">
+                            <input
+                                className="form-control"
+                                id="stateCode"
+                                placeholder="State Code:"
+                                {...register('stateCode')}
+                            />
+                        </span>
+                        {errors.stateCode && <p className="form-text text-danger">{errors.stateCode.message}</p>}
 
-                    <label className="create__label" htmlFor="stateCode">State Code:</label>
-                    <span className="input">
-                        <input
-                            id="stateCode"
-                            placeholder="State Code:"
-                            {...register('stateCode')}
-                        />
-                    </span>
-                    {errors.stateCode && <p className="login__errors">{errors.stateCode.message}</p>}
+                        <label className="form-label" htmlFor="phoneNumber">Phone Number:</label>
+                        <span className="input">
+                            <input
+                                className="form-control"
+                                id='phoneNumber'
+                                placeholder="Phone Number:"
+                                {...register('phoneNumber')}
+                            />
+                        </span>
+                        {errors.phoneNumber && <p className="form-text text-danger">{errors.phoneNumber.message}</p>}
 
-                    <label className="create__label" htmlFor="phoneNumber">Phone Number:</label>
-                    <span className="input">
-                        <input
-                            id='phoneNumber'
-                            placeholder="Phone Number:"
-                            {...register('phoneNumber')}
-                        />
-                    </span>
-                    {errors.phoneNumber && <p className="login__errors">{errors.phoneNumber.message}</p>}
+                        <label className="form-label" htmlFor="stateCode">State Code:</label>
+                        <span className="input">
+                            <input
+                                className="form-control"
+                                id="stateCode"
+                                placeholder="State Code:"
+                                {...register('stateCode')}
+                            />
+                        </span>
+                        {errors.stateCode && <p className="form-text text-danger">{errors.stateCode.message}</p>}
 
-                    <label className="create__label" htmlFor="stateCode">State Code:</label>
-                    <span className="input">
-                        <input
-                            id="stateCode"
-                            placeholder="State Code:"
-                            {...register('stateCode')}
-                        />
-                    </span>
-                    {errors.stateCode && <p className="login__errors">{errors.stateCode.message}</p>}
+                    </div>
+                    <div className="col-6">
+                        <h3>Payment Card</h3>
 
-                    {/* payment */}
-
-
-                    {isLoading ? <Loading /> :
-                        <label>
-                            Select Payment Method
-                            <select {...register('paymentMethod')}>
-                                <option value=''>
-                                    please select method
-                                </option>
-                                {data.applicable_payment_methods?.map((method) => (
-                                    <option value={method?.id} key={method?.name}>
-                                        {method.name}
+                        {isLoading ? <Loading /> :
+                            <label className='form-label'>
+                                Select Payment Method
+                                <select className='form-select' {...register('paymentMethod')}>
+                                    <option value=''>
+                                        please select method
                                     </option>
-                                ))}
-                            </select>
-                        </label>}
-                    {errors.paymentMethod && <p className="login__errors">{errors.paymentMethod.message}</p>}
+                                    {data.applicable_payment_methods?.map((method) => (
+                                        <option value={method?.id} key={method?.name}>
+                                            {method.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </label>}
+                        {errors.paymentMethod && <p className="form-text text-danger">{errors.paymentMethod.message}</p>}
 
-                    {data && data.applicable_payment_methods ?
-                        <label>
-                            Select Card Type
-                            <select {...register('cardType')}>
-                                <option value=''>
-                                    please select method
-                                </option>
-                                {data.applicable_payment_methods[0]?.cards?.map((card) => (
-                                    <option value={card?.card_type} key={card?.name}>
-                                        {card.name}
+                        {data && data.applicable_payment_methods ?
+                            <label className='form-label'>
+                                Select Card Type
+                                <select className='form-select'{...register('cardType')}>
+                                    <option value=''>
+                                        please select method
                                     </option>
-                                ))}
-                            </select>
-                        </label> : <Loading></Loading>}
-                    {errors.cardType && <p className="login__errors">{errors.cardType.message}</p>}
+                                    {data.applicable_payment_methods[0]?.cards?.map((card) => (
+                                        <option value={card?.card_type} key={card?.name}>
+                                            {card.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </label> : <Loading />}
+                        {errors.cardType && <p className="form-text text-danger">{errors.cardType.message}</p>}
 
-                    <label className="create__label" htmlFor="cardNumber">Card Number:</label>
-                    <span className="input">
+                        <label className="form-label" htmlFor="cardNumber">Card Number:</label>
+                        <span className="input">
+                            <input
+                                className='form-control'
+                                id="cardNumber"
+                                placeholder="4444333322221111"
+                                {...register('cardNumber')}
+                            />
+                        </span>
+                        {errors.cardNumber && <p className="form-text text-danger">{errors.cardNumber.message}</p>}
+
+
+                        <label className="form-label" htmlFor="securityCode">Security Code:</label>
+                        <span className="input">
+                            <input
+                                className='form-control'
+                                id="securityCode"
+                                placeholder="123"
+                                {...register('securityCode')}
+                            />
+                        </span>
+                        {errors.securityCode && <p className="form-text text-danger">{errors.securityCode.message}</p>}
+
+                        <label className="form-label" htmlFor="expirationMonth">Expiration Month</label>
+                        <span className="input">
+                            <input
+                                className='form-control'
+                                id="expirationMonth"
+                                placeholder="1-12"
+                                {...register('expirationMonth')}
+                            />
+                        </span>
+                        {errors.expirationMonth && <p className="form-text text-danger">{errors.expirationMonth.message}</p>}
+
+                        <label className="form-label" htmlFor="expirationYear">Expiration Year</label>
+                        <span className="input">
+                            <input
+                                className='form-control'
+                                id="expirationYear"
+                                placeholder="23-30"
+                                {...register('expirationYear')}
+                            />
+                        </span>
+                        {errors.expirationYear && <p className="form-text text-danger">{errors.expirationYear.message}</p>}
+
+                    </div>
+                    <div className="col-12 pt-3">
+
                         <input
-                            id="cardNumber"
-                            placeholder="4444333322221111"
-                            {...register('cardNumber')}
-                        />
-                    </span>
-                    {errors.cardNumber && <p className="login__errors">{errors.cardNumber.message}</p>}
-
-
-                    <label className="create__label" htmlFor="securityCode">Security Code:</label>
-                    <span className="input">
-                        <input
-                            id="securityCode"
-                            placeholder="123"
-                            {...register('securityCode')}
-                        />
-                    </span>
-                    {errors.securityCode && <p className="login__errors">{errors.securityCode.message}</p>}
-
-                    <label className="create__label" htmlFor="expirationMonth">Expiration Month</label>
-                    <span className="input">
-                        <input
-                            id="expirationMonth"
-                            placeholder="1-12"
-                            {...register('expirationMonth')}
-                        />
-                    </span>
-                    {errors.expirationMonth && <p className="login__errors">{errors.expirationMonth.message}</p>}
-
-
-                    <label className="create__label" htmlFor="expirationYear">Expiration Year</label>
-                    <span className="input">
-                        <input
-                            id="expirationYear"
-                            placeholder="23-30"
-                            {...register('expirationYear')}
-                        />
-                    </span>
-                    {errors.expirationYear && <p className="login__errors">{errors.expirationYear.message}</p>}
-
-                    <div className="">
-                        <input
-                            className="button submit"
+                            className="btn btn-primary"
                             type="submit"
                             value="Add Payment"
                         />
-                    </div>
-                </form >
-            </div>
 
+                    </div>
+                </div>
+
+
+
+
+
+
+
+            </form >
         </>
     );
 };

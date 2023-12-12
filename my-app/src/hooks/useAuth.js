@@ -6,32 +6,23 @@ const optionsAuth = {
     'Content-Type': 'application/json',
     'x-dw-client-id': `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`,
   },
-  body : JSON.stringify({ type: 'guest' })
+  body: JSON.stringify({ type: 'guest' })
 };
 
 const useAuth = (url) => {
   const [token, setToken] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-console.log("auth");
-  // const existingToken = localStorage.getItem('token');
-  // console.log(existingToken, 'existingToken');
-  // let type;
-  // if (existingToken === null || existingToken === undefined) {
-  //   type = 'guest';
-  // } else if (existingToken) {
-  //   optionsAuth.headers.Authorization = existingToken;
-  //   type = 'guest';
-  // }
-  // optionsAuth.body = JSON.stringify({ type: type });
-  console.log(optionsAuth, 'optionsAuth');
+
   useEffect(() => {
     const abortController = new AbortController();
+    const { signal } = abortController;
+
     const fetchData = () => {
       setIsLoading(true);
       setError(null);
 
-      fetch(url, optionsAuth)
+      fetch(url, { ...optionsAuth, signal })
         .then((response) => {
           console.log('responseAUth', response.headers.get('authorization'));
           setToken(response.headers.get('authorization'));
@@ -60,9 +51,8 @@ console.log("auth");
       abortController.abort();
     };
   }, [url]);
-  console.log(token, 'localStorage');
   localStorage.setItem('token', token);
-
   return { token, isLoading, error };
 };
+
 export default useAuth;

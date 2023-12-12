@@ -30,7 +30,7 @@ export const addShippingAddress = async (basketId, shipmentId, formData) => {
 
 export const putShippingMethod = async (basketId, shipmentId, shippingMethodId) => {
 
-    const urlGetShipmentMethod = getShipmentMethodsUrl(basketId,shipmentId);
+    const urlGetShipmentMethod = getShipmentMethodsUrl(basketId, shipmentId);
     let shipmentMethods;
 
     try {
