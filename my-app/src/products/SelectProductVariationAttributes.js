@@ -20,7 +20,7 @@ const ProductVariantAttributes = ({
 
   return (
     <div className='pb-3'>
-      <label className='fw-bold pr-2'>Select {variationAattribute.name}:  </label>
+      <label className='fw-bold pe-2'>Select {variationAattribute.name}:</label>
       <select className='ml-2'
         value={varOption}
         onChange={(e) => handleVarOptionChange(e.target.value)}

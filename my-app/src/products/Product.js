@@ -57,9 +57,9 @@ const Product = ({ product }) => {
       <p className='pb-1'><span className="fw-bold">Description: </span>{product.short_description}</p>
 
       <div className="row">
-        <div className="col-2">
+        <div className="col-3">
 
-          <p className='pb-1'><span className="fw-bold">Price: </span>{product.price}<span>{product.currency}</span></p>
+          <p className='pb-1'><span className="fw-bold">Price: </span>{product.price}<span> {product.currency}</span></p>
           {variationAattributes?.map((attribute) => (
             <ProductVariantAttributes
               variationAattribute={attribute}

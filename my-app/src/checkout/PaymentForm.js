@@ -42,29 +42,24 @@ const PaymentForm = ({ setIsReadyToOrder }) => {
                     <div className="col-6">
                         <h3>Billing Address</h3>
                         <label className="form-label" htmlFor="firstName">First Name:</label>
-                        <span className="input">
                             <input
                                 className="form-control"
                                 id="firstName"
                                 placeholder="First Name:"
                                 {...register('firstName')}
                             />
-                        </span>
                         {errors.firstName && <p className="form-text text-danger">{errors.firstName.message}</p>}
 
                         <label className="form-label" htmlFor="lastName">Last Name:</label>
-                        <span className="input">
                             <input
                                 className="form-control"
                                 id='lastName'
                                 placeholder="Last Name:"
                                 {...register('lastName')}
                             />
-                        </span>
                         {errors.lastName && <p className="form-text text-danger">{errors.lastName.message}</p>}
 
                         <label className="form-label" htmlFor="address">Address:</label>
-                        <span className="input">
                             <input
                                 className="form-control"
 
@@ -72,73 +67,60 @@ const PaymentForm = ({ setIsReadyToOrder }) => {
                                 placeholder="Address:"
                                 {...register('address')}
                             />
-                        </span>
                         {errors.address && <p className="form-text text-danger">{errors.address.message}</p>}
 
                         <label className="form-label" htmlFor="city">City:</label>
-                        <span className="input">
                             <input
                                 className="form-control"
                                 id="city"
                                 placeholder="City:"
                                 {...register('city')}
                             />
-                        </span>
                         {errors.city && <p className="form-text text-danger">{errors.city.message}</p>}
 
                         <label className="form-label" htmlFor="countryCode">Country Code:</label>
-                        <span className="input">
                             <input
                                 className="form-control"
                                 id="countryCode"
                                 placeholder="Country Code:"
                                 {...register('countryCode')}
                             />
-                        </span>
                         {errors.countryCode && <p className="form-text text-danger">{errors.countryCode.message}</p>}
 
                         <label className="form-label" htmlFor="postalCode">Postal Code:</label>
-                        <span className="input">
                             <input
                                 className="form-control"
                                 id="postalCode"
                                 placeholder="Postal Code:"
                                 {...register('postalCode')}
                             />
-                        </span>
                         {errors.postalCode && <p className="form-text text-danger">{errors.postalCode.message}</p>}
 
                         <label className="form-label" htmlFor="stateCode">State Code:</label>
-                        <span className="input">
                             <input
                                 className="form-control"
                                 id="stateCode"
                                 placeholder="State Code:"
                                 {...register('stateCode')}
                             />
-                        </span>
                         {errors.stateCode && <p className="form-text text-danger">{errors.stateCode.message}</p>}
 
                         <label className="form-label" htmlFor="phoneNumber">Phone Number:</label>
-                        <span className="input">
                             <input
                                 className="form-control"
                                 id='phoneNumber'
                                 placeholder="Phone Number:"
                                 {...register('phoneNumber')}
                             />
-                        </span>
                         {errors.phoneNumber && <p className="form-text text-danger">{errors.phoneNumber.message}</p>}
 
                         <label className="form-label" htmlFor="stateCode">State Code:</label>
-                        <span className="input">
                             <input
                                 className="form-control"
                                 id="stateCode"
                                 placeholder="State Code:"
                                 {...register('stateCode')}
                             />
-                        </span>
                         {errors.stateCode && <p className="form-text text-danger">{errors.stateCode.message}</p>}
 
                     </div>
@@ -178,53 +160,43 @@ const PaymentForm = ({ setIsReadyToOrder }) => {
                         {errors.cardType && <p className="form-text text-danger">{errors.cardType.message}</p>}
 
                         <label className="form-label" htmlFor="cardNumber">Card Number:</label>
-                        <span className="input">
                             <input
                                 className='form-control'
                                 id="cardNumber"
                                 placeholder="4444333322221111"
                                 {...register('cardNumber')}
                             />
-                        </span>
                         {errors.cardNumber && <p className="form-text text-danger">{errors.cardNumber.message}</p>}
 
-
                         <label className="form-label" htmlFor="securityCode">Security Code:</label>
-                        <span className="input">
                             <input
                                 className='form-control'
                                 id="securityCode"
                                 placeholder="123"
                                 {...register('securityCode')}
                             />
-                        </span>
                         {errors.securityCode && <p className="form-text text-danger">{errors.securityCode.message}</p>}
 
                         <label className="form-label" htmlFor="expirationMonth">Expiration Month</label>
-                        <span className="input">
                             <input
                                 className='form-control'
                                 id="expirationMonth"
                                 placeholder="1-12"
                                 {...register('expirationMonth')}
                             />
-                        </span>
                         {errors.expirationMonth && <p className="form-text text-danger">{errors.expirationMonth.message}</p>}
 
                         <label className="form-label" htmlFor="expirationYear">Expiration Year</label>
-                        <span className="input">
                             <input
                                 className='form-control'
                                 id="expirationYear"
                                 placeholder="23-30"
                                 {...register('expirationYear')}
                             />
-                        </span>
                         {errors.expirationYear && <p className="form-text text-danger">{errors.expirationYear.message}</p>}
 
                     </div>
                     <div className="col-12 pt-3">
-
                         <input
                             className="btn btn-primary"
                             type="submit"

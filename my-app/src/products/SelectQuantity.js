@@ -6,7 +6,7 @@ const Quantity = ({ quantity, setQuantity }) => {
 
     return (
         <div className="mb-3">
-            <label className="fw-bold">Select Quantity:</label>
+            <label className="fw-bold pe-2">Select Quantity:</label>
             <select value={quantity} onChange={e => setQuantity(e.target.value)}>
                 {quantityValues.map(quantityValue => <option value={quantityValue} key={quantityValue}>{quantityValue}</option>)}
             </select>
