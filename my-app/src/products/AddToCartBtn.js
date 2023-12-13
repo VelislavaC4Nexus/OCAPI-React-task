@@ -1,6 +1,7 @@
 import { useCartContext } from "../contexts/CartContext";
 import { addProductToBasket, getExistingBasket } from "../services/cartService";
 import { createBasket } from "../services/cartService";
+import { addToCartBtn, productIsNotAvailable } from "../utils/contentConstants";
 
 
 const AddToCartBtn = ({ selectedProduct, quantity, isOrderable }) => {
@@ -28,11 +29,11 @@ const AddToCartBtn = ({ selectedProduct, quantity, isOrderable }) => {
 
     if (selectedProduct) {
         if (isOrderable) {
-            return <button className="btn btn-primary" onClick={addToCartHandler}>Add to Cart</button>;
+            return <button className="btn btn-primary" onClick={addToCartHandler}>{addToCartBtn}</button>;
         }
-        return <p>Product is not available.</p>;
+        return <p>{productIsNotAvailable}</p>;
     } else {
-        return <button className="btn btn-primary" onClick={addToCartHandler} disabled>Add to Cart</button>;
+        return <button className="btn btn-primary" onClick={addToCartHandler} disabled>{addToCartBtn}</button>;
     }
 };
 

@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import ProductVariantAttributes from './SelectProductVariationAttributes';
 import Quantity from './SelectQuantity';
 import AddToCartBtn from './AddToCartBtn';
+import { description, price, productIdConstant } from '../utils/contentConstants';
+
 
 const Product = ({ product }) => {
   const [variationAattributes, setVariationAattributes] = useState(null);
@@ -50,13 +52,13 @@ const Product = ({ product }) => {
   return (
     <>
       <h3 className="pb-3">Product: {product.name}</h3>
-      <p className='pb-1'><span className="fw-bold">Product Id: </span><span>{product.id}</span></p>
-      <p className='pb-1'><span className="fw-bold">Description: </span>{product.short_description}</p>
+      <p className='pb-1'><span className="fw-bold">{productIdConstant} </span><span>{product.id}</span></p>
+      <p className='pb-1'><span className="fw-bold">{description} </span>{product.short_description}</p>
 
       <div className="row">
         <div className="col-3">
 
-          <p className='pb-1'><span className="fw-bold">Price: </span>{product.price}<span> {product.currency}</span></p>
+          <p className='pb-1'><span className="fw-bold">{price} </span>{product.price}<span> {product.currency}</span></p>
           {variationAattributes?.map((attribute) => (
             <ProductVariantAttributes
               variationAattribute={attribute}

@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { urlConstants } from '../utils/urlConstants';
+
 
 const optionsAuth = {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    'x-dw-client-id': `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`,
+    'x-dw-client-id': urlConstants().CLIENT_ID,
   },
   body: JSON.stringify({ type: 'guest' })
 };

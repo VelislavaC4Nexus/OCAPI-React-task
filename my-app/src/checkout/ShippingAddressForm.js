@@ -6,6 +6,19 @@ import { putShippingMethod, addShippingAddress } from '../services/checkoutServi
 import { useCartContext } from '../contexts/CartContext';
 import useFetch from '../hooks/useFetch';
 import { getShippingMethodsUrl } from '../utils/urlEndpoints';
+import {
+    address,
+    city,
+    countryCode,
+    firstName,
+    lastName,
+    phoneNumber,
+    pleaseSelectMethod,
+    postalCode,
+    selectShipmentMethod,
+    shippingAddressTitle,
+    stateCode
+} from '../utils/contentConstants';
 
 const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
     const { cart, setCart } = useCartContext();
@@ -34,7 +47,7 @@ const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
 
     };
     return (<>
-        <h3>Shipping Address:</h3>
+        <h3>{shippingAddressTitle}</h3>
 
         <div>
             <form onSubmit={handleSubmit(submitForm)}>
@@ -42,7 +55,7 @@ const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
                     <div className="col-6">
 
                         <div className='p-2'>
-                            <label className="form-label" htmlFor="firstName">First Name:</label>
+                            <label className="form-label" htmlFor="firstName">{firstName}</label>
                             <input
                                 className='form-control'
                                 id="firstName"
@@ -53,7 +66,7 @@ const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
                         </div>
 
                         <div className='p-2'>
-                            <label className="form-label" htmlFor="lastName">Last Name:</label>
+                            <label className="form-label" htmlFor="lastName">{lastName}</label>
                             <input
                                 className='form-control'
                                 id='lastName'
@@ -64,7 +77,7 @@ const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
                         </div>
 
                         <div className='p-2'>
-                            <label className="form-label" htmlFor="address">Address:</label>
+                            <label className="form-label" htmlFor="address">{address}</label>
                             <input
                                 className='form-control'
                                 id="address"
@@ -74,7 +87,7 @@ const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
                             {errors.address && <p className="form-text text-danger">{errors.address.message}</p>}
                         </div>
                         <div className='p-2'>
-                            <label className="form-label" htmlFor="city">City:</label>
+                            <label className="form-label" htmlFor="city">{city}</label>
                             <input
                                 className='form-control'
                                 id="city"
@@ -86,7 +99,7 @@ const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
                     </div>
                     <div className="col-6">
                         <div className='p-2'>
-                            <label className="form-label" htmlFor="countryCode">Country Code:</label>
+                            <label className="form-label" htmlFor="countryCode">{countryCode}</label>
                             <input
                                 className='form-control'
                                 id="countryCode"
@@ -97,7 +110,7 @@ const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
                         </div>
 
                         <div className='p-2'>
-                            <label className="form-label" htmlFor="postalCode">Postal Code:</label>
+                            <label className="form-label" htmlFor="postalCode">{postalCode}</label>
                             <input
                                 className='form-control'
                                 id="postalCode"
@@ -108,7 +121,7 @@ const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
                         </div>
 
                         <div className='p-2'>
-                            <label className="form-label" htmlFor="stateCode">State Code:</label>
+                            <label className="form-label" htmlFor="stateCode">{stateCode}</label>
                             <input
                                 className='form-control'
                                 id="stateCode"
@@ -119,7 +132,7 @@ const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
                         </div>
 
                         <div className='p-2'>
-                            <label className="form-label" htmlFor="phoneNumber">Phone Number:</label>
+                            <label className="form-label" htmlFor="phoneNumber">{phoneNumber}</label>
                             <input
                                 className='form-control'
                                 id='phoneNumber'
@@ -135,10 +148,10 @@ const ShippingAddressForm = ({ setIsShipping, isShipping }) => {
                         <div className='p-2 mb-4'>
                             {isLoading ? <Loading /> :
                                 <label className='form-label'>
-                                    Select Shipment Method
+                                    {selectShipmentMethod}
                                     <select className='form-select' {...register('shipmentMethod')}>
                                         <option value=''>
-                                            please select method
+                                            {pleaseSelectMethod}
                                         </option>
                                         {data.applicable_shipping_methods?.map((method) => (
                                             <option value={method?.id} key={method?.name}>
